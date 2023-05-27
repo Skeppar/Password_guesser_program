@@ -11,6 +11,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a password you want to test:");
         String enteredPassword = sc.nextLine();
+        System.out.println("Guessing password, this may take some time so please be patient...");
 
         String filePath = "src/passwords.txt"; // Path to the text file with passwords
         String[] commonPasswords = readPasswordsFromFile(filePath);
