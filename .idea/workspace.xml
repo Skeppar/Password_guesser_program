@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f724fe88-9eb7-4f5e-ae52-557f10b38d3e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Password guesser test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/OldCommonPasswordChecker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/passwords.txt" afterDir="false" />
+    <list default="true" id="f724fe88-9eb7-4f5e-ae52-557f10b38d3e" name="Changes" comment="I wanted to make a program that could guess passwords so that a person can try typing in their password and see how safe it is. I have included the 10 000 most common passwords as well from Wikipedia. I am still working on this but since I have a functional program I am saving it now and will make further iterations in the future.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/passwords.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/passwords.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +46,13 @@
       <option name="presentableId" value="Default" />
       <updated>1685187762799</updated>
     </task>
+    <task id="LOCAL−00001" summary="I wanted to make a program that could guess passwords so that a person can try typing in their password and see how safe it is. I have included the 10 000 most common passwords as well from Wikipedia. I am still working on this but since I have a functional program I am saving it now and will make further iterations in the future.">
+      <created>1685223475396</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1685223475396</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -65,6 +65,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="I wanted to make a program that could guess passwords so that a person can try typing in their password and see how safe it is. I have included the 10 000 most common passwords as well from Wikipedia. I am still working on this but since I have a functional program I am saving it now and will make further iterations in the future." />
+    <option name="LAST_COMMIT_MESSAGE" value="I wanted to make a program that could guess passwords so that a person can try typing in their password and see how safe it is. I have included the 10 000 most common passwords as well from Wikipedia. I am still working on this but since I have a functional program I am saving it now and will make further iterations in the future." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
