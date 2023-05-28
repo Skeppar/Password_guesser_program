@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f724fe88-9eb7-4f5e-ae52-557f10b38d3e" name="Changes" comment="Added a periodic message every 10 seconds to let you know it is still working. I also changed the time taken from only milliseconds to actually display days, hours, minutes, seconds and milliseconds. Finally, I edited the messages a bit.">
-      <change beforePath="$PROJECT_DIR$/src/OldCommonPasswordChecker.java" beforeDir="false" />
+    <list default="true" id="f724fe88-9eb7-4f5e-ae52-557f10b38d3e" name="Changes" comment="I decided to remove the old common password checker class since I moved everything into main. Normally I would prefer to split things up into different classes as it makes each class more structured and readable (in my opinion) but since this is such a small program it is not a problem in this particular case.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +75,13 @@
       <option name="presentableId" value="LOCAL−00005" />
       <updated>1685276100171</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL−00006" summary="I decided to remove the old common password checker class since I moved everything into main. Normally I would prefer to split things up into different classes as it makes each class more structured and readable (in my opinion) but since this is such a small program it is not a problem in this particular case.">
+      <created>1685276203600</created>
+      <option name="number" value="LOCAL−00006" />
+      <option name="presentableId" value="LOCAL−00006" />
+      <updated>1685276203600</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -93,7 +100,8 @@
     <MESSAGE value="Made some modifications. Now it starts from the lowest number instead of highest (startLength and maxLength) and also tells you how many attempts it took to crack if it didn't find the password in the password.txt file." />
     <MESSAGE value="It can take quite some time to guess the right password, so I just added a line to let you know it's working on it." />
     <MESSAGE value="Added a periodic message every 10 seconds to let you know it is still working. I also changed the time taken from only milliseconds to actually display days, hours, minutes, seconds and milliseconds. Finally, I edited the messages a bit." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a periodic message every 10 seconds to let you know it is still working. I also changed the time taken from only milliseconds to actually display days, hours, minutes, seconds and milliseconds. Finally, I edited the messages a bit." />
+    <MESSAGE value="I decided to remove the old common password checker class since I moved everything into main. Normally I would prefer to split things up into different classes as it makes each class more structured and readable (in my opinion) but since this is such a small program it is not a problem in this particular case." />
+    <option name="LAST_COMMIT_MESSAGE" value="I decided to remove the old common password checker class since I moved everything into main. Normally I would prefer to split things up into different classes as it makes each class more structured and readable (in my opinion) but since this is such a small program it is not a problem in this particular case." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

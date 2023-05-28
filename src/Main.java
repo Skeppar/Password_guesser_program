@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import java.util.HashSet;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,13 +13,21 @@ public class Main {
         System.out.println("Guessing password, this may take some time so please be patient...");
 
         String filePath = "src/passwords.txt"; // Path to the text file with passwords
-        String[] commonPasswords = readPasswordsFromFile(filePath);
+        //String[] commonPasswords = readPasswordsFromFile(filePath);
+        /*
+        I asked chatgpt for suggestions to improve the code, and it suggested using HashSet. This shouldn't improve the brute-force speed, but it would most likely improve the
+        speed it takes to find the password in the txt file. However, since the file only has 10k passwords it only takes a few milliseconds for my computer to find them so
+        this does not offer a significant advantage for me. It may be different if the txt file was much larger, but since I do not have a larger sample size as of right now
+        it is not possible to test the new (and hopefully improved) efficiency of this code. But I will leave it in since it maybe an overall improvement if you were to have
+        a larger sample size of common passwords.
+        */
+        HashSet<String> commonPasswords = readPasswordsFromFile(filePath);
         AlphabetPrinter.printCombinations(6, 10, commonPasswords, enteredPassword); // This is the password length, most passwords are over 6 characters in length, but I used 4 just as a test.
     }
 
-    private static String[] readPasswordsFromFile(String filePath) {
+    private static HashSet<String> readPasswordsFromFile(String filePath) {
 
-        List<String> passwords = new ArrayList<>();
+        HashSet<String> passwords = new HashSet<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -30,7 +39,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        return passwords.toArray(new String[0]);
+        return passwords;
     }
 
     static class AlphabetPrinter {
@@ -39,7 +48,7 @@ public class Main {
 
         private static boolean targetFound;
 
-        public static void printCombinations(int startLength, int maxLength, String[] commonPasswords, String targetPassword) {
+        public static void printCombinations(int startLength, int maxLength, HashSet<String> commonPasswords, String targetPassword) {
 
             long startTime = System.currentTimeMillis();
 
