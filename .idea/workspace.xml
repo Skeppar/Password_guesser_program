@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f724fe88-9eb7-4f5e-ae52-557f10b38d3e" name="Changes" comment="Added a periodic message every 10 seconds to let you know it is still working. I also changed the time taken from only milliseconds to actually display days, hours, minutes, seconds and milliseconds. Finally, I edited the messages a bit.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OldCommonPasswordChecker.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +68,13 @@
       <option name="presentableId" value="LOCAL−00004" />
       <updated>1685232231638</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL−00005" summary="Added a periodic message every 10 seconds to let you know it is still working. I also changed the time taken from only milliseconds to actually display days, hours, minutes, seconds and milliseconds. Finally, I edited the messages a bit.">
+      <created>1685276100171</created>
+      <option name="number" value="LOCAL−00005" />
+      <option name="presentableId" value="LOCAL−00005" />
+      <updated>1685276100171</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
