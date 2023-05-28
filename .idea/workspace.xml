@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f724fe88-9eb7-4f5e-ae52-557f10b38d3e" name="Changes" comment="Made some modifications. Now it starts from the lowest number instead of highest (startLength and maxLength) and also tells you how many attempts it took to crack if it didn't find the password in the password.txt file.">
+    <list default="true" id="f724fe88-9eb7-4f5e-ae52-557f10b38d3e" name="Changes" comment="It can take quite some time to guess the right password, so I just added a line to let you know it's working on it.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -57,7 +57,13 @@
       <option name="presentableId" value="LOCAL−00002" />
       <updated>1685227404937</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL−00003" summary="It can take quite some time to guess the right password, so I just added a line to let you know it's working on it.">
+      <created>1685227842148</created>
+      <option name="number" value="LOCAL−00003" />
+      <option name="presentableId" value="LOCAL−00003" />
+      <updated>1685227842148</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -74,7 +80,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="I wanted to make a program that could guess passwords so that a person can try typing in their password and see how safe it is. I have included the 10 000 most common passwords as well from Wikipedia. I am still working on this but since I have a functional program I am saving it now and will make further iterations in the future." />
     <MESSAGE value="Made some modifications. Now it starts from the lowest number instead of highest (startLength and maxLength) and also tells you how many attempts it took to crack if it didn't find the password in the password.txt file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Made some modifications. Now it starts from the lowest number instead of highest (startLength and maxLength) and also tells you how many attempts it took to crack if it didn't find the password in the password.txt file." />
+    <MESSAGE value="It can take quite some time to guess the right password, so I just added a line to let you know it's working on it." />
+    <option name="LAST_COMMIT_MESSAGE" value="It can take quite some time to guess the right password, so I just added a line to let you know it's working on it." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

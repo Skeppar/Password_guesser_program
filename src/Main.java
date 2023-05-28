@@ -1,9 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,7 +13,7 @@ public class Main {
 
         String filePath = "src/passwords.txt"; // Path to the text file with passwords
         String[] commonPasswords = readPasswordsFromFile(filePath);
-        AlphabetPrinter.printCombinations(4, 10, commonPasswords, enteredPassword); // This is the password length, most passwords are over 6 characters in length, but I used 4 just as a test.
+        AlphabetPrinter.printCombinations(6, 10, commonPasswords, enteredPassword); // This is the password length, most passwords are over 6 characters in length, but I used 4 just as a test.
     }
 
     private static String[] readPasswordsFromFile(String filePath) {
@@ -37,12 +35,27 @@ public class Main {
 
     static class AlphabetPrinter {
         private static final String CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        private static final int UPDATE_INTERVAL_MS = 10000; // 10 seconds
+
+        private static boolean targetFound;
 
         public static void printCombinations(int startLength, int maxLength, String[] commonPasswords, String targetPassword) {
+
             long startTime = System.currentTimeMillis();
 
-            // Print passwords from the file
-            boolean targetFound = false;
+            // Start the timer for periodic message to let the user know the program is still working.
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if (targetFound) {
+                        timer.cancel();
+                    } else {
+                        System.out.println("Still working, please wait...");
+                    }
+                }
+            }, UPDATE_INTERVAL_MS, UPDATE_INTERVAL_MS);
+
             int count = 1;
             for (String password : commonPasswords) {
                 if (password.length() >= startLength && password.length() <= maxLength) {
@@ -51,8 +64,12 @@ public class Main {
                         long endTime = System.currentTimeMillis();
                         long elapsedTime = endTime - startTime;
                         System.out.println("Password reached: " + password);
-                        System.out.println("Time taken: " + elapsedTime + " milliseconds");
-                        System.out.println("Your password is number " + count + " amongst the most common passwords in the world");
+                        System.out.println("Time taken: " + elapsedTime + " milliseconds.");
+                        if (count == 1) {
+                            System.out.println("Congratulations, you have the most common password in the world...this is not good, please change it...now.");
+                        } else if (count > 1) {
+                            System.out.println("Your password is number " + count + " amongst the most common passwords in the world.");
+                        }
                         targetFound = true;
                         break;
                     }
@@ -60,7 +77,7 @@ public class Main {
                 }
             }
 
-            // Generate combinations if target password not found
+            // Generate combinations if target password was not found
             if (!targetFound) {
                 for (int length = startLength; length <= maxLength; length++) {
                     generateCombinations("", length, startTime, targetPassword, count);
@@ -69,14 +86,55 @@ public class Main {
         }
 
         private static void generateCombinations(String combination, int length, long startTime, String targetPassword, int count) {
+
             if (combination.length() == length) {
-                //System.out.println("Current combination: " + combination);
+                // System.out.println("Current combination: " + combination);
                 if (combination.equals(targetPassword)) {
-                    long endTime = System.currentTimeMillis();
-                    long elapsedTime = endTime - startTime;
+                    double endTime = System.currentTimeMillis();
+                    double elapsedTime = endTime - startTime;
                     System.out.println("Password reached: " + combination);
-                    System.out.println("It took " + count + " of attempts to break your password");
-                    System.out.println("Time taken: " + elapsedTime + " milliseconds");
+                    System.out.println("It took " + count + " attempts to break your password");
+
+                    // Calculate time taken to guess a password
+                    double milliseconds = elapsedTime % 1000;
+                    double seconds = Math.floor((elapsedTime / 1000) % 60);
+                    double minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
+                    double hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24);
+                    double days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+
+                    // Construct the "time taken" message
+                    StringBuilder timeTaken = new StringBuilder("Time taken: ");
+                    if (days > 0) {
+                        timeTaken.append((int) days).append(" day");
+                        if (days > 1) {
+                            timeTaken.append("s");
+                        }
+                        timeTaken.append(" & ");
+                    }
+                    if (hours > 0) {
+                        timeTaken.append((int) hours).append(" hour");
+                        if (hours > 1) {
+                            timeTaken.append("s");
+                        }
+                        timeTaken.append(" & ");
+                    }
+                    if (minutes > 0) {
+                        timeTaken.append((int) minutes).append(" minute");
+                        if (minutes > 1) {
+                            timeTaken.append("s");
+                        }
+                        timeTaken.append(" & ");
+                    }
+                    if (seconds > 0) {
+                        timeTaken.append((int) seconds).append(" second");
+                        if (seconds > 1) {
+                            timeTaken.append("s");
+                        }
+                        timeTaken.append(" & ");
+                    }
+                    timeTaken.append((int) milliseconds).append(" millisecond");
+
+                    System.out.println(timeTaken);
                     System.exit(0);
                 }
             }
