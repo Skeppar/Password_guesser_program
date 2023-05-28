@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f724fe88-9eb7-4f5e-ae52-557f10b38d3e" name="Changes" comment="I decided to remove the old common password checker class since I moved everything into main. Normally I would prefer to split things up into different classes as it makes each class more structured and readable (in my opinion) but since this is such a small program it is not a problem in this particular case.">
+    <list default="true" id="f724fe88-9eb7-4f5e-ae52-557f10b38d3e" name="Changes" comment="Asked chatgpt if it had suggestions to improve my code, and it suggested using HashSet instead of an Array to store the common passwords. I implemented it, but it makes little to no visible difference to this code with my limited sample size of common passwords. I will keep it as I might add more passwords in the future.">
+      <change afterPath="$PROJECT_DIR$/src/dictionary.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
@@ -81,7 +82,13 @@
       <option name="presentableId" value="LOCAL−00006" />
       <updated>1685276203600</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL−00007" summary="Asked chatgpt if it had suggestions to improve my code, and it suggested using HashSet instead of an Array to store the common passwords. I implemented it, but it makes little to no visible difference to this code with my limited sample size of common passwords. I will keep it as I might add more passwords in the future.">
+      <created>1685285747059</created>
+      <option name="number" value="LOCAL−00007" />
+      <option name="presentableId" value="LOCAL−00007" />
+      <updated>1685285747059</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -101,7 +108,8 @@
     <MESSAGE value="It can take quite some time to guess the right password, so I just added a line to let you know it's working on it." />
     <MESSAGE value="Added a periodic message every 10 seconds to let you know it is still working. I also changed the time taken from only milliseconds to actually display days, hours, minutes, seconds and milliseconds. Finally, I edited the messages a bit." />
     <MESSAGE value="I decided to remove the old common password checker class since I moved everything into main. Normally I would prefer to split things up into different classes as it makes each class more structured and readable (in my opinion) but since this is such a small program it is not a problem in this particular case." />
-    <option name="LAST_COMMIT_MESSAGE" value="I decided to remove the old common password checker class since I moved everything into main. Normally I would prefer to split things up into different classes as it makes each class more structured and readable (in my opinion) but since this is such a small program it is not a problem in this particular case." />
+    <MESSAGE value="Asked chatgpt if it had suggestions to improve my code, and it suggested using HashSet instead of an Array to store the common passwords. I implemented it, but it makes little to no visible difference to this code with my limited sample size of common passwords. I will keep it as I might add more passwords in the future." />
+    <option name="LAST_COMMIT_MESSAGE" value="Asked chatgpt if it had suggestions to improve my code, and it suggested using HashSet instead of an Array to store the common passwords. I implemented it, but it makes little to no visible difference to this code with my limited sample size of common passwords. I will keep it as I might add more passwords in the future." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -10,10 +10,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a password you want to test:");
         String enteredPassword = sc.nextLine();
-        System.out.println("Guessing password, this may take some time so please be patient...");
 
-        String filePath = "src/passwords.txt"; // Path to the text file with passwords
-        //String[] commonPasswords = readPasswordsFromFile(filePath);
         /*
         I asked chatgpt for suggestions to improve the code, and it suggested using HashSet. This shouldn't improve the brute-force speed, but it would most likely improve the
         speed it takes to find the password in the txt file. However, since the file only has 10k passwords it only takes a few milliseconds for my computer to find them so
@@ -21,14 +18,33 @@ public class Main {
         it is not possible to test the new (and hopefully improved) efficiency of this code. But I will leave it in since it maybe an overall improvement if you were to have
         a larger sample size of common passwords.
         */
-        HashSet<String> commonPasswords = readPasswordsFromFile(filePath);
-        AlphabetPrinter.printCombinations(6, 10, commonPasswords, enteredPassword); // This is the password length, most passwords are over 6 characters in length, but I used 4 just as a test.
+        //String[] commonPasswords = readPasswordsFromFile(filePath);
+        //HashSet<String> commonPasswords = readPasswordsFromFile(filePath);
+
+        // Easy way of adding multiple file paths if you want to add more in the future.
+        String[] filePaths = {
+                "src/dictionary.txt",   // Path to the dictionary file
+                "src/passwords.txt"     // Path to the passwords file
+        };
+
+        ArrayList<String> commonPasswords = new ArrayList<>(); // The count was wrong since HashSet does not preserve the order, now the count works properly.
+        HashSet<String> dictionaryPasswords = new HashSet<>();
+
+        for (String filePath : filePaths) {
+            if (filePath.endsWith("dictionary.txt")) {
+                dictionaryPasswords.addAll(readPasswordsFromFile(filePath));
+            } else if (filePath.endsWith("passwords.txt")) {
+                commonPasswords.addAll(readPasswordsFromFile(filePath));
+            }
+        }
+
+        AlphabetPrinter.printCombinations(6, 10, commonPasswords, dictionaryPasswords, enteredPassword);
     }
 
-    private static HashSet<String> readPasswordsFromFile(String filePath) {
+    private static ArrayList<String> readPasswordsFromFile(String filePath) {
+        ArrayList<String> passwords = new ArrayList<>();
 
-        HashSet<String> passwords = new HashSet<>();
-
+        // Read the common passwords from the file
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -48,7 +64,7 @@ public class Main {
 
         private static boolean targetFound;
 
-        public static void printCombinations(int startLength, int maxLength, HashSet<String> commonPasswords, String targetPassword) {
+        public static void printCombinations(int startLength, int maxLength, ArrayList<String> commonPasswords, HashSet<String> dictionaryPasswords, String targetPassword) {
 
             long startTime = System.currentTimeMillis();
 
@@ -65,95 +81,117 @@ public class Main {
                 }
             }, UPDATE_INTERVAL_MS, UPDATE_INTERVAL_MS);
 
-            int count = 1;
+            int countCommonPasswords = 1;
+            boolean foundInPasswordsTxt = false;
+
             for (String password : commonPasswords) {
-                if (password.length() >= startLength && password.length() <= maxLength) {
-                    //System.out.println("Found common password from file: " + password);
+                // Overlooked that HashSet is not in order so changed commonPasswords back to ArrayList and use HashSet for dictionary. If not the count is off.
                     if (password.equals(targetPassword)) {
+                        foundInPasswordsTxt = true;
                         long endTime = System.currentTimeMillis();
                         long elapsedTime = endTime - startTime;
-                        System.out.println("Password reached: " + password);
+                        System.out.println("\nPassword reached: " + password);
                         System.out.println("Time taken: " + elapsedTime + " milliseconds.");
-                        if (count == 1) {
-                            System.out.println("Congratulations, you have the most common password in the world...this is not good, please change it...now.");
-                        } else if (count > 1) {
-                            System.out.println("Your password is number " + count + " amongst the most common passwords in the world.");
-                        }
-                        targetFound = true;
                         break;
                     }
-                    count++;
-                }
+                countCommonPasswords++;
             }
+
+            if (foundInPasswordsTxt) {
+                if (countCommonPasswords == 1) {
+                    System.out.println("Congratulations, you have the most common password in the world...this is not good, please change it...now.");
+                } else {
+                    System.out.println("Your password is number " + countCommonPasswords + " amongst the most common passwords in the world.");
+                }
+                System.exit(0);
+            } else {
+                // If password was not found in passwords.txt file it will then check the dictionary.txt file.
+                for (String password : dictionaryPasswords) {
+                        if (password.equals(targetPassword)) {
+                            long endTime = System.currentTimeMillis();
+                            long elapsedTime = endTime - startTime;
+                            System.out.println("\nPassword reached: " + password);
+                            System.out.println("Time taken: " + elapsedTime + " milliseconds.");
+                            System.out.println("Your password was found in the dictionary.");
+                            System.exit(0);
+                            targetFound = true;
+                            break;
+                        }
+                    }
+
 
             // Generate combinations if target password was not found
             if (!targetFound) {
-                for (int length = startLength; length <= maxLength; length++) {
-                    generateCombinations("", length, startTime, targetPassword, count);
-                }
+                System.out.println("Password not found in common password or dictionary files, now attempting to generate password.");
+                generateCombinations("", startLength, maxLength, startTime, targetPassword, 1);
             }
         }
+    }
 
-        private static void generateCombinations(String combination, int length, long startTime, String targetPassword, int count) {
-
+        private static int generateCombinations(String combination, int length, int maxLength, long startTime, String targetPassword, int count) {
             if (combination.length() == length) {
-                // System.out.println("Current combination: " + combination);
+                 // System.out.println(combination);
                 if (combination.equals(targetPassword)) {
-                    double endTime = System.currentTimeMillis();
-                    double elapsedTime = endTime - startTime;
-                    System.out.println("Password reached: " + combination);
+                    long endTime = System.currentTimeMillis();
+                    long elapsedTime = endTime - startTime;
+                    System.out.println("\nPassword reached: " + combination);
                     System.out.println("It took " + count + " attempts to break your password");
 
                     // Calculate time taken to guess a password
-                    double milliseconds = elapsedTime % 1000;
-                    double seconds = Math.floor((elapsedTime / 1000) % 60);
-                    double minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
-                    double hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24);
-                    double days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+                    long milliseconds = elapsedTime % 1000;
+                    long seconds = (elapsedTime / 1000) % 60;
+                    long minutes = (elapsedTime / (1000 * 60)) % 60;
+                    long hours = (elapsedTime / (1000 * 60 * 60)) % 24;
+                    long days = elapsedTime / (1000 * 60 * 60 * 24);
 
                     // Construct the "time taken" message
                     StringBuilder timeTaken = new StringBuilder("Time taken: ");
                     if (days > 0) {
-                        timeTaken.append((int) days).append(" day");
+                        timeTaken.append(days).append(" day");
                         if (days > 1) {
                             timeTaken.append("s");
                         }
                         timeTaken.append(" & ");
                     }
                     if (hours > 0) {
-                        timeTaken.append((int) hours).append(" hour");
+                        timeTaken.append(hours).append(" hour");
                         if (hours > 1) {
                             timeTaken.append("s");
                         }
                         timeTaken.append(" & ");
                     }
                     if (minutes > 0) {
-                        timeTaken.append((int) minutes).append(" minute");
+                        timeTaken.append(minutes).append(" minute");
                         if (minutes > 1) {
                             timeTaken.append("s");
                         }
                         timeTaken.append(" & ");
                     }
                     if (seconds > 0) {
-                        timeTaken.append((int) seconds).append(" second");
+                        timeTaken.append(seconds).append(" second");
                         if (seconds > 1) {
                             timeTaken.append("s");
                         }
                         timeTaken.append(" & ");
                     }
-                    timeTaken.append((int) milliseconds).append(" millisecond");
+                    timeTaken.append(milliseconds).append(" millisecond");
 
                     System.out.println(timeTaken);
                     System.exit(0);
                 }
             }
 
-            if (combination.length() < length) {
+            if (combination.length() < maxLength) {
                 for (int i = 0; i < CHARS.length(); i++) {
                     String newCombination = combination + CHARS.charAt(i);
-                    generateCombinations(newCombination, length, startTime, targetPassword, count);
+                    count = generateCombinations(newCombination, length, maxLength, startTime, targetPassword, count);
                 }
             }
+            // Increment count only when combination length matches the target length
+            if (combination.length() == length) {
+                count++;
+            }
+            return count;
         }
     }
 }
